@@ -5,7 +5,7 @@
 set -e
 
 # debug
-set -x
+# set -x
 
 # parse and derive params
 BUILD_DIR=$1
@@ -41,6 +41,6 @@ rm $BUILD_DIR/vendor/chromedriver/chromedriver.zip
 
 topic "Writing profile script"
 mkdir -p $BUILD_DIR/.profile.d
-cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
-export PATH="\$HOME/vendor/chromedriver:$PATH"
+cat <<EOF >$BUILD_DIR/.profile.d/chromedriver.sh
+export PATH="\$BUILD_DIR/vendor/chromedriver:$PATH"
 EOF
