@@ -32,15 +32,15 @@ function indent() {
 # Create the vendor chromedriver directory
 mkdir -p $BUILD_DIR/vendor/chromedriver
 
-# Download google chrome driver
-topic "Downloading and installing ChromeDriver"
-chromedriver_url="http://chromedriver.storage.googleapis.com/2.16/chromedriver_linux64.zip"
-curl $chromedriver_url -s -o $BUILD_DIR/vendor/chromedriver/chromedriver.zip
-unzip $BUILD_DIR/vendor/chromedriver/chromedriver.zip
-rm $BUILD_DIR/vendor/chromedriver/chromedriver.zip
-
-topic "Writing profile script"
-mkdir -p $BUILD_DIR/.profile.d
-cat <<EOF >$BUILD_DIR/.profile.d/chromedriver.sh
-export PATH="\$BUILD_DIR/vendor/chromedriver:$PATH"
-EOF
+# # Download google chrome driver
+# topic "Downloading and installing ChromeDriver"
+# chromedriver_url="http://chromedriver.storage.googleapis.com/2.16/chromedriver_linux64.zip"
+# curl $chromedriver_url -s -o $BUILD_DIR/vendor/chromedriver/chromedriver.zip
+# unzip $BUILD_DIR/vendor/chromedriver/chromedriver.zip
+# rm $BUILD_DIR/vendor/chromedriver/chromedriver.zip
+#
+# topic "Writing profile script"
+# mkdir -p $BUILD_DIR/.profile.d
+# cat <<EOF >$BUILD_DIR/.profile.d/chromedriver.sh
+# export PATH="\$BUILD_DIR/vendor/chromedriver:$PATH"
+# EOF
