@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 # bin/detect <build-dir>
 
-exit 0
+if [ -d $1/vendor/chromedriver ]; then
+  echo "no" && exit 1
+else
+  echo "ChromeDriver" && exit 0
+fi
