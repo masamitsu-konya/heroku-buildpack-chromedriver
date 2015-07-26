@@ -36,7 +36,8 @@ mkdir -p $BUILD_DIR/vendor/chromedriver
 topic "Downloading and installing ChromeDriver"
 chromedriver_url="http://chromedriver.storage.googleapis.com/2.16/chromedriver_linux64.zip"
 curl $chromedriver_url -s -o $BUILD_DIR/vendor/chromedriver/chromedriver.zip
-unzip $BUILD_DIR/vendor/chromedriver/chromedriver.zip
+unzip $BUILD_DIR/vendor/chromedriver/chromedriver.zip -d $BUILD_DIR/vendor/chromedriver
+rm $BUILD_DIR/vendor/chromedriver/chromedriver.zip
 ls -lah $BUILD_DIR/vendor/chromedriver
 
 topic "Writing profile script"
