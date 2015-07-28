@@ -28,11 +28,32 @@ function indent() {
   esac
 }
 
-# Create the vendor chromedriver directory
+APT_CACHE_DIR="$CACHE_DIR/apt/cache"
+APT_STATE_DIR="$CACHE_DIR/apt/state"
+
+mkdir -p "$APT_CACHE_DIR/archives/partial"
+mkdir -p "$APT_STATE_DIR/lists/partial"
+
+topic "Installing Chrome"
+
+PACKAGE="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+PACKAGE_NAME=$(basename $PACKAGE .deb)
+PACKAGE_FILE=$APT_CACHE_DIR/archives/$PACKAGE_NAME.deb
+
+topic "Fetching $PACKAGE"
+curl -s -L -z $PACKAGE_FILE -o $PACKAGE_FILE $PACKAGE 2>&1 | indent
+
+topic "Installing $PACKAGE"
+dpkg -x $PACKAGE_FILE $BUILD_DIR/.apt/
+cd $BUILD_DIR/.apt/usr/bin
+rm google-chrome-stable
+ln -s ../../opt/google/chrome/google-chrome google-chrome-stable
+
+
+topic "Downloading and installing ChromeDriver"
+
 mkdir -p $BUILD_DIR/vendor/chromedriver
 
-# Download google chrome driver
-topic "Downloading and installing ChromeDriver"
 chromedriver_url="http://chromedriver.storage.googleapis.com/2.16/chromedriver_linux64.zip"
 curl $chromedriver_url -s -o $BUILD_DIR/vendor/chromedriver/chromedriver.zip
 unzip $BUILD_DIR/vendor/chromedriver/chromedriver.zip -d $BUILD_DIR/vendor/chromedriver
